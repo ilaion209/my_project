@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת הצבעות על הצעות חוק</title>
+</head>
+<body>
+    <h1>מערכת הצבעות על הצעות חוק</h1>
+    <form action="/add_law" method="POST">
+        <label for="first_name">שם פרטי:</label>
+        <input type="text" name="first_name" required><br>
+
+        <label for="last_name">שם משפחה:</label>
+        <input type="text" name="last_name" required><br>
+
+        <label for="id_number">תעודת זהות:</label>
+        <input type="text" name="id_number" required><br>
+
+        <label for="law_title">כותרת הצעת החוק:</label>
+        <input type="text" name="law_title" required><br>
+
+        <label for="law_description">תיאור הצעת החוק:</label>
+        <textarea name="law_description" rows="4" cols="50" required></textarea><br>
+
+        <input type="submit" value="הוסף הצעת חוק">
+    </form>
+
+    <h2>רשימת הצעות החוק</h2>
+    <ul>
+        {% for law in laws %}
+        <li>
+            <strong>{{ law.title }}</strong><br>
+            פרטי ההצעה: {{ law.description }}<br>
+            הוצע על ידי: {{ law.first_name }} {{ law.last_name }} (תעודת זהות: {{ law.id_number }})<br>
+            הצבעות בעד: {{ law.votes_for }} | הצבעות נגד: {{ law.votes_against }}<br>
+            <a href="/vote_for/{{ law._id }}">הצבע בעד</a> |
+            <a href="/vote_against/{{ law._id }}">הצבע נגד</a> |
+            <a href="/delete_law/{{ law._id }}">מחק</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
