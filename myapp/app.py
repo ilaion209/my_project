@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 # חיבור למסד הנתונים
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://192.168.110.145:27017/')
 db = client.mydb  # החלף לשם הבסיס המתאים
 laws = db.laws  # החלף לשם הקולקציה המתאימה
 
@@ -79,4 +79,4 @@ def add_law():
         return str(e)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=5000)
